@@ -8,6 +8,11 @@ export default defineNuxtConfig({
         public: {
             wordpressUrl: 'https://acfheadless.wpengine.com/graphql'
         }
+    },
+    routeRules: {
+        '/**': {
+            swr: true
+        }
     }
 })
 
