@@ -2,8 +2,8 @@
 const route = useRoute()
 const config = useRuntimeConfig();
 const { data, refresh, pending } = await useFetch(config.public.wordpressUrl, {
-  method: 'post',
-  body: {
+  method: 'get',
+  query: {
     query: `
       query NewQuery {
         posts(first:10){
@@ -16,7 +16,7 @@ const { data, refresh, pending } = await useFetch(config.public.wordpressUrl, {
         }
       }`
 }, 
-transform(data){
+transform(data:any){
  return data.data.posts.nodes as Array<Record<'title' | 'date' | 'excerpt' | 'uri', string>>;
 }
 });

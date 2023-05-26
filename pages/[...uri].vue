@@ -3,10 +3,8 @@
       <TheHeader></TheHeader>
         <main class="bg-gray-100 container mx-auto mt-6 p-6 rounded-lg">
             <h1 class="text-4xl">{{ data.title }}</h1>
-            <div class="text-2xl mt-4">Date</div>
+            <div class="text-2xl mt-4">{{ new Date(data.date).toLocaleDateString() }}</div>
             <article class="mt-4 space-y-2" v-html="data.content"></article>
-            <h3 class="text-2xl mt-4 mb-4">Block Content</h3>
-            <BlockRenderer :blocks="data.editorBlocks"></BlockRenderer>
         </main>
     </div>
 </template>
@@ -15,9 +13,10 @@
 
 const route = useRoute();
 const uri = route.params.uri.join('/');
-const {data, pending, refresh, error} = await useFetch('https://acfheadless.wpengine.com/graphql', {
-    method: 'post',
-    body: { 
+const config = useRuntimeConfig();
+const {data, pending, refresh, error} = await useFetch(config.public.wordpressUrl, {
+    method: 'get',
+    query: { 
         query: `
         query MyQuery3($uri: String!) {
             nodeByUri(uri: $uri) {
@@ -26,27 +25,9 @@ const {data, pending, refresh, error} = await useFetch('https://acfheadless.wpen
                     title
                     date
                     content
-                    editorBlocks {
-                        name
-                        clientId
-                        renderedHtml
-                        cssClassNames
-                        ... on CoreImage {
-                            apiVersion
-                            attributes {
-                                src
-                                alt
-                            }
-                        }
-                        ... on CoreParagraph {
-                            attributes {
-                                content
-                            }
-                        }
-                    }
                 }
             }
-            }
+        }
         `,
         variables: {
             uri: uri
