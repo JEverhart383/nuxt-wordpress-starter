@@ -1,42 +1,33 @@
-# Nuxt 3 Minimal Starter
+# Nuxt 3 WordPress Starter
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+This project is meant to be a flexible starting point for people interested in using [Nuxt 3](https://nuxt.com/) with WordPress as a headless CMS. If you want some additional resources to help get you started, check out the blog post and video linked below.
 
-## Setup
+[✍️ Read the step-by-step tutorial](https://wpengine.com/builders/headless-wordpress-with-nuxt-3-vue-3/(opens in a new tab))
+[📹 Watch the video]()
 
-Make sure to install the dependencies:
+## Requirements
+- [WordPress](https://wordpress.org/)
+- [WPGraphQL](https://www.wpgraphql.com/docs/introduction)
+- Environment Variables
 
-```bash
-# yarn
-yarn install
+Update the `wordpressUrl` variable in `nuxt.config.ts` to your WordPress site and run `npm run dev`:
 
-# npm
-npm install
+```
+export default defineNuxtConfig({
+    modules: [
+        '@nuxt/devtools',
+        '@nuxtjs/tailwindcss' 
+    ],
+    runtimeConfig: {
+        public: {
+            wordpressUrl: 'https://yourwordpresssite/graphql'
+        }
+    }
+})
 
-# pnpm
-pnpm install
 ```
 
-## Development Server
 
-Start the development server on http://localhost:3000
+## Headless WordPress Hosting with Atlas
 
-```bash
-npm run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-npm run build
-```
-
-Locally preview production build:
-
-```bash
-npm run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+WP Engine's Atlas platform provides a performant and user-friendly hosting platform for headless WordPress and Node-based JavaScript apps. [Create a free sandbox account](https://wpengine.com/atlas/) to try the platform, and check out our Astro deployment guide for instruction to deploy to the platform.
