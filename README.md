@@ -2,7 +2,7 @@
 
 This project is meant to be a flexible starting point for people interested in using [Nuxt 3](https://nuxt.com/) with WordPress as a headless CMS. If you want some additional resources to help get you started, check out the blog post and video linked below.
 
-[✍️ Read the step-by-step tutorial](https://wpengine.com/builders/headless-wordpress-with-nuxt-3-vue-3/(opens in a new tab))
+[✍️ Read the step-by-step tutorial](https://wpengine.com/builders/headless-wordpress-with-nuxt-3-vue-3/)
 [📹 Watch the video]()
 
 ## Requirements
