@@ -12,7 +12,16 @@
  <script setup>
  
  const route = useRoute();
- const accessToken = route.query.access_token;
+ let accessToken; 
+ const cookie = useCookie('access-token', {httpOnly: true, maxAge: 300});
+ if (cookie.value){
+    console.log(cookie.expires)
+    accessToken = cookie.value;
+ } else {
+    console.log(cookie)
+    accessToken = route.query.access_token;
+    cookie.value = accessToken;
+ }
  const previewId = route.query.preview_id;
  const config = useRuntimeConfig();
 //  use post here so we don't cache any null responses based on invalid credential
