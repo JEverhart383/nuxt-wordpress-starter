@@ -6,7 +6,10 @@ export default defineNuxtConfig({
     ],
     runtimeConfig: {
         public: {
-            wordpressUrl: 'https://acfheadless.wpengine.local/graphql'
+            wordpressUrl: 'https://acfheadless.wpengine.com/graphql'
+        },
+        private: {
+          FAUST_SECRET_KEY: process.env.FAUST_SECRET_KEY
         }
     }
 })
