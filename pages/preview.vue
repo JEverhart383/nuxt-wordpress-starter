@@ -17,7 +17,7 @@
 
  let tokens;
 
- const cookie = useCookie('https://localhost:3000-rt', {httpOnly: true, maxAge: 300});
+ const cookie = useCookie(`${config.public.frontendSiteUrl}-rt`, {httpOnly: true, maxAge: 300});
  if (cookie.value){
     const refreshToken = cookie.value;
     tokens = await getTokensFromRefreshToken(refreshToken);
@@ -29,7 +29,7 @@
  }
 
 //  use post here so we don't cache any null responses based on invalid credential
- const {data, pending, refresh, error} = await useFetch(config.public.wordpressUrl, {
+ const {data, pending, refresh, error} = await useFetch(`${config.public.wordpressUrl}/graphql`, {
     method: 'post',
     body: JSON.stringify({
         query: `

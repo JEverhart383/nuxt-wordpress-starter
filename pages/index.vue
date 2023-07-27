@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const route = useRoute()
 const config = useRuntimeConfig();
-const { data, refresh, pending } = await useFetch(config.public.wordpressUrl, {
+const { data, refresh, pending } = await useFetch(`${config.public.wordpressUrl}/graphql`, {
   method: 'get',
   query: {
     query: `

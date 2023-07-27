@@ -14,7 +14,7 @@
 const route = useRoute();
 const uri = route.params.uri.join('/');
 const config = useRuntimeConfig();
-const {data, pending, refresh, error} = await useFetch(config.public.wordpressUrl, {
+const {data, pending, refresh, error} = await useFetch(`${config.public.wordpressUrl}/graphql`, {
     method: 'get',
     query: { 
         query: `
