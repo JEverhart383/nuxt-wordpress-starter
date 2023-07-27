@@ -10,20 +10,27 @@
  </template>
  
  <script setup>
- 
+ import {getTokensFromCode} from '../faust';
  const route = useRoute();
- let accessToken; 
- const cookie = useCookie('access-token', {httpOnly: true, maxAge: 300});
- if (cookie.value){
-    console.log(cookie.expires)
-    accessToken = cookie.value;
- } else {
-    console.log(cookie)
-    accessToken = route.query.access_token;
-    cookie.value = accessToken;
- }
- const previewId = route.query.preview_id;
  const config = useRuntimeConfig();
+ const {code, preview_id: previewId} = route.query;
+ console.log(code)
+ const tokens = await getTokensFromCode(code);
+ console.log(tokens.accessToken)
+//Don't store access token in cookie, and set refreshToken instead as cookie
+//If refreshToken, get new access code and replace value of refresh token
+
+//  const cookie = useCookie('access-token', {httpOnly: true, maxAge: 300});
+//  if (cookie.value){
+//     console.log(cookie.expires)
+//     accessToken = cookie.value;
+//  } else {
+//     console.log(cookie)
+//     accessToken = route.query.access_token;
+//     console.log(accessToken)
+//     cookie.value = accessToken;
+//  }
+
 //  use post here so we don't cache any null responses based on invalid credential
  const {data, pending, refresh, error} = await useFetch(config.public.wordpressUrl, {
     method: 'post',
@@ -43,12 +50,13 @@
         }
     }),
     headers: {
-        "Authorization": `Bearer ${accessToken}`
+        Authorization: `Bearer ${tokens.accessToken}`
     },
     transform(data){
         console.log(data)
         return data.data.post
     }
  })
+
  
  </script>
