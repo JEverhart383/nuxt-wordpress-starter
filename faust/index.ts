@@ -26,8 +26,6 @@ export async function getTokensFromCode(code:string): Promise<Tokens>{
           code
         }),
       });
-    const tokens = await response.json();
-    console.log(tokens)
-    const accessToken = tokens.accessToken;
+    const tokens: Tokens = await response.json();
     return tokens;
 }
